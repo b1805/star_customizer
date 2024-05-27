@@ -64,4 +64,4 @@ This project is licensed under the MIT License. See the [LICENSE](https://github
 
 ## Contact
 
-Bhavya Jain - bhavya1805@gmail.com
+Bhavya Jain - bhavya1805@gmail.com | bjain1@ualberta.ca
