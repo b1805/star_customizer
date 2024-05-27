@@ -11,7 +11,7 @@ Custom Star Room Illumination is an interactive web-based application that simul
 
 ## Live Demo
 
-https://b1805.github.io/star_customizer/#installation
+https://b1805.github.io/star_customizer/
 
 ## Installation
 
