@@ -17,7 +17,7 @@ https://b1805.github.io/star_customizer/
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/bhavyajain/custom-star-room-illumination.git
+   git clone https://github.com/b1805/star_customizer
    cd custom-star-room-illumination
    ```
 
