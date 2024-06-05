@@ -306,27 +306,27 @@ SOFTWARE. -->
 
     function calculateCoords() {
       COORDS = [];
-      if (THETA != (Math.PI)/4) {
-        for (let i = 1; i <= (2 * Math.PI) / THETA; i++) {
-          if (i % 2 === 0) {
-            COORDS.push([
-              400 + 350 * Math.sin(i * THETA),
-              400 + 350 * Math.cos(i * THETA)
-            ]);
-          } else {
-            COORDS.push([
-              400 + (175 / Math.cos(THETA)) * Math.sin(i * THETA),
-              400 + (175 / Math.cos(THETA)) * Math.cos(i * THETA)
-            ]);
+      if (THETA != (Math.PI) / 4) {
+          for (let i = 1; i <= (2 * Math.PI) / THETA; i++) {
+              if (i % 2 === 0) {
+                  COORDS.push([
+                      +(400 + 350 * Math.sin(i * THETA)).toFixed(PRECISION),
+                      +(400 + 350 * Math.cos(i * THETA)).toFixed(PRECISION)
+                  ]);
+              } else {
+                  COORDS.push([
+                      +(400 + (175 / Math.cos(THETA)) * Math.sin(i * THETA)).toFixed(PRECISION),
+                      +(400 + (175 / Math.cos(THETA)) * Math.cos(i * THETA)).toFixed(PRECISION)
+                  ]);
+              }
           }
-        }
       } else {
-        COORDS.push(
-          [400+350*Math.sin(2*THETA), 400+350*Math.cos(2*THETA)],
-          [400+350*Math.sin(4*THETA), 400+350*Math.cos(4*THETA)],
-          [400+350*Math.sin(6*THETA), 400+350*Math.cos(6*THETA)],
-          [400+350*Math.sin(8*THETA), 400+350*Math.cos(8*THETA)],
-        );
+          COORDS.push(
+              [+(400 + 350 * Math.sin(2 * THETA)).toFixed(PRECISION), +(400 + 350 * Math.cos(2 * THETA)).toFixed(PRECISION)],
+              [+(400 + 350 * Math.sin(4 * THETA)).toFixed(PRECISION), +(400 + 350 * Math.cos(4 * THETA)).toFixed(PRECISION)],
+              [+(400 + 350 * Math.sin(6 * THETA)).toFixed(PRECISION), +(400 + 350 * Math.cos(6 * THETA)).toFixed(PRECISION)],
+              [+(400 + 350 * Math.sin(8 * THETA)).toFixed(PRECISION), +(400 + 350 * Math.cos(8 * THETA)).toFixed(PRECISION)]
+          );
       }
     }
 
