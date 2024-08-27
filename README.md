@@ -46,9 +46,11 @@ https://b1805.github.io/star_customizer/
 
 ## Files
 
-- `index.html`: Main HTML file containing the structure and interface of the application.
-- `whammy.js`: Library for creating video from canvas frames.
-- `classes.js`: Contains classes for managing light rays (photons) and line segments.
+- `index.html`
+- `whammy.js`
+- `classes.js`
+- `script.js`
+- `style.css`
 
 ## License
 
