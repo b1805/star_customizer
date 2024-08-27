@@ -1,6 +1,6 @@
 # Custom Star Room Illumination
 
-Custom Star Room Illumination is an interactive web-based application that simulates light rays bouncing off walls in a customizable room. You can adjust the number of light rays, the number of triangles forming the room, precision, photon thickness colors, and animation speed. You can also switch to the angle version to shoot the rays one at a time at your chosen angles. Additionally, you can record the simulation and download the video.
+Custom Star Room Illumination is an interactive web-based application that simulates light rays bouncing off walls in a customizable room. You can adjust the number of light rays, the number of triangles forming the room, precision, photon thickness colors, and animation speed. You can also switch to the angle version to shoot the rays one at a time at your chosen angles and colours. Additionally, you can record the simulation and download the video.
 
 ## Theory
 
@@ -8,7 +8,7 @@ Any star room made for an even number of triangles >=6 (6,8,10,12....), when a r
 
 ## Features
 
-- **Interactive Controls:** Modify the number of triangles, light rays, speed, and colors.
+- **Interactive Controls:** Modify the number of triangles, light rays, speed, precision, thickness, version and colors.
 - **Real-time Animation:** Start and stop the animation at any time.
 - **Photon Counter:** Displays the number of active photons in the simulation.
 - **Recording Functionality:** Record the animation and download the video.
