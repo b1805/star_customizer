@@ -4,7 +4,7 @@ Custom Star Room Illumination is an interactive web-based application that simul
 
 ## Theory
 
-Any star room made for an even number of triangles >=6 (6,8,10,12....), when a ray of light is shot from its midpoint in all directions, would never return back to the midpoint but illuminate the rest of the room completely. It is as if you're standing in the middle of the room with a lamp, an observer can see everything in the room except for you! This works using the implementation of right triangles, as my supervisor George Tokarsky first theorized in 1995 to create the first-ever un-illuminable room!
+Any star room made for an even number of triangles >=6 (6,8,10,12....), when rays of light are shot from its midpoint in all directions, would never return back to the midpoint but illuminate the rest of the room completely. It is as if you're standing in the middle of the room with a lamp, an observer can see everything in the room except for you! This works using the implementation of right triangles, as my supervisor George Tokarsky first theorized in 1995 to create the first-ever un-illuminable room!
 
 ## Features
 
