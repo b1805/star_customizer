@@ -125,7 +125,7 @@ class Photon {
         return false;
       }
       var dist = Math.hypot(this.x - px, this.y - py);
-      return dist <= Math.max(0.3, this.collisionRadius);
+      return dist <= Math.max(PRECISION*1.5, this.collisionRadius);
     }
   
     // Returns whether or not the photon collides with a line segment (a wall).
