@@ -1,6 +1,6 @@
 # Custom Star Room Illumination
 
-Custom Star Room Illumination is an interactive web-based application that simulates light rays bouncing off walls in a customizable room. You can adjust the number of light rays, the number of triangles forming the room, colors, and animation speed. Additionally, you can record the simulation and download the video.
+Custom Star Room Illumination is an interactive web-based application that simulates light rays bouncing off walls in a customizable room. You can adjust the number of light rays, the number of triangles forming the room, precision, photon thickness colors, and animation speed. You can also switch to the angle version to shoot the rays one at a time at your chosen angles. Additionally, you can record the simulation and download the video.
 
 ## Theory
 
