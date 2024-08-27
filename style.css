@@ -27,8 +27,12 @@ body {
     padding: 0;
 }
 
+input[type="number"] {
+    width: 60px;
+}
+
 .container {
-    max-width: 1000px;
+    width: 1850px;
     margin: 20px auto;
     background-color: #ffffff;
     border-radius: 8px;
@@ -81,16 +85,8 @@ button:hover {
     background-color: #115293;
 }
 
-canvas {
-    display: block;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    height: auto;
-}
-
 .flex-container {
+    width: 1850px;
     display: flex;
     justify-content: space-between;
 }
