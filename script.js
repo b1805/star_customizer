@@ -2,11 +2,42 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 const BACKGROUND_COLOR = '#000000';
+let PHOTON_HEAD_SIZE = 1.30;
+let PHOTON_TAIL_SIZE = 0.50;
+let MAG_HEAD_SIZE = 3.00;
+let MAG_TAIL_SIZE = 1.00;
 const ORIGIN = [400, 400]; // The light source
 const MAG = ORIGIN; // The point to be magnified
 let THETA = (Math.PI) / 6;
 let NUMBER_LIGHT_RAYS = 360;
+let ANGLE = 360;
 let RENDER_INTERVAL_TIME = 33;
+let PRECISION = 0.3;
+let SCREEN_ZOOM = 0.97 * (window.innerWidth / 1850);
+
+//Screen Zoom
+function setZoom() {
+  SCREEN_ZOOM = 0.97 * (window.innerWidth / 1850);
+  document.body.style.transform = `scale(${SCREEN_ZOOM})`;
+  document.body.style.transformOrigin = "0 0"; // Set the origin to top-left
+}
+setZoom();
+
+// Add an event listener to resize the zoom when the window is resized
+window.addEventListener('resize', setZoom);
+
+// Version toggle
+function toggleVersion() {
+  if (customAngle.checked) {
+    angleDiv.style.display = 'block';
+    rayDiv.style.display = 'none';
+    addPhotonButton.style.display = 'block';
+  } else {
+    angleDiv.style.display = 'none';
+    rayDiv.style.display = 'block';
+    addPhotonButton.style.display = 'none';
+  }
+}
 
 function applyColors() {
   WALL_COLOR = document.getElementById("wallColorInput").value;
@@ -36,9 +67,28 @@ function changeNumRays() {
     NUMBER_LIGHT_RAYS = parseInt(document.getElementById("numRaysInput").value);
 }
 
+// Function to change the angle of the light ray
+function changeAngle() {
+  ANGLE = parseFloat(document.getElementById("angleInput").value);
+}
+
 // Function to change rendering speed
 function changeSpeed() {
     RENDER_INTERVAL_TIME = parseInt(document.getElementById("speedInput").value);
+}
+
+// Changes Epsilon Value
+function changeEpsilon() {
+  PRECISION = parseFloat(document.getElementById("epsilonInput").value);
+  //console.log(PRECISION);
+}
+
+// Changes the Thickness
+function changeThickness() {
+  PHOTON_HEAD_SIZE = parseFloat(document.getElementById("headSizeInput").value);
+  PHOTON_TAIL_SIZE = parseFloat(document.getElementById("tailSizeInput").value);
+  MAG_HEAD_SIZE = parseFloat(document.getElementById("magHeadSizeInput").value);
+  MAG_TAIL_SIZE = parseFloat(document.getElementById("magTailSizeInput").value);
 }
 
 const MAG_SIDE = 20; // Side length of the `MAG` box.
@@ -171,11 +221,6 @@ function loadBoundaries() {
 
 function createPhotons() {
   photons = new Array();
-  // Testing photons:
-  // photons.push(new Photon(ORIGIN[0], ORIGIN[1], Math.PI * (1 / 6), 0.151,
-  //     0.151, 'red', 'red'));
-  // photons.push(new Photon(ORIGIN[0], ORIGIN[1], -Math.PI * (1 / 6), 0.151,
-  //     0.175, 'red', 'red'));
   var photonRadius = 15;
   for (var i = 0; i < NUMBER_LIGHT_RAYS; ++i) {
     var fractionOfAngle = (i / NUMBER_LIGHT_RAYS) * Math.PI * 2;
@@ -183,13 +228,44 @@ function createPhotons() {
       ORIGIN[0] + photonRadius * Math.cos(fractionOfAngle),
       ORIGIN[1] + photonRadius * Math.sin(fractionOfAngle),
       (i / NUMBER_LIGHT_RAYS) * 2 * Math.PI,
-      THETA/Math.PI,
-      THETA/Math.PI,
+      (5*PRECISION*THETA)/Math.PI,
+      (5*PRECISION*THETA)/Math.PI,
       PHOTON_HEAD_COLOR,
       PHOTON_TAIL_COLOR
     ));
   }
 }
+
+function createPhotons2() {
+  photons = new Array();
+  var photonRadius = 15;
+  var fractionOfAngle = -(ANGLE / 360) * Math.PI * 2;
+  photons.push(new Photon(
+      ORIGIN[0] + photonRadius * Math.cos(fractionOfAngle),
+      ORIGIN[1] + photonRadius * Math.sin(fractionOfAngle),
+      Math.PI * (-ANGLE / 180), 
+      (5*PRECISION*THETA)/Math.PI,
+      (5*PRECISION*THETA)/Math.PI, 
+      PHOTON_HEAD_COLOR, 
+      PHOTON_TAIL_COLOR));
+}
+
+function addPhoton() {
+  var photonRadius = 15;
+  var fractionOfAngle = (ANGLE / 360) * Math.PI * 2;
+
+  var newPhoton = new Photon(
+    ORIGIN[0] + photonRadius * Math.cos(fractionOfAngle),
+    ORIGIN[1] + photonRadius * Math.sin(fractionOfAngle),
+    Math.PI * (-ANGLE / 180), 
+    PRECISION,
+    PRECISION, 
+    PHOTON_HEAD_COLOR, 
+    PHOTON_TAIL_COLOR);
+
+  photons.push(newPhoton);
+}
+
 
 function drawCircle(x, y, radius, color) {
   ctx.beginPath();
@@ -205,7 +281,7 @@ function drawSquare(x, y, sideLength, color) {
   ctx.closePath();
 }
 
-function drawLine(x1, y1, x2, y2, color, width = 0.5) {
+function drawLine(x1, y1, x2, y2, color, width = PHOTON_TAIL_SIZE) {
   ctx.beginPath();
   ctx.strokeStyle = color;
   ctx.lineWidth = width;
@@ -267,7 +343,7 @@ function drawPhotons() {
   }
   for (var i = 0; i < photons.length; ++i) {
     if (photons[i].active) {
-      drawCircle(photons[i].x, photons[i].y, 1.3, photons[i].headColor);
+      drawCircle(photons[i].x, photons[i].y, PHOTON_HEAD_SIZE, photons[i].headColor);
     }
   }
 }
@@ -284,7 +360,7 @@ function drawMag() {
       magLines[i][1][0],
       magLines[i][1][1],
       magLines[i][2],
-      1
+      MAG_TAIL_SIZE
     );
   }
   // Draw the photons.
@@ -294,9 +370,9 @@ function drawMag() {
       var dy = photons[i].y - MAG[1];
       var viewerX = MAG_VIEW[0] + (MAG_VIEW_SIDE / MAG_SIDE) * dx;
       var viewerY = MAG_VIEW[1] + (MAG_VIEW_SIDE / MAG_SIDE) * dy;
-      drawCircle(viewerX, viewerY, 3, photons[i].headColor);
+      drawCircle(viewerX, viewerY, MAG_HEAD_SIZE, photons[i].headColor);
       drawLine(photons[i].magEntry[0], photons[i].magEntry[1], viewerX,
-          viewerY, photons[i].tailColor, 1);
+          viewerY, photons[i].tailColor, MAG_TAIL_SIZE);
     }
   }
   // Draw the box around the point in the room.
@@ -406,7 +482,11 @@ function startAnimation() {
   clearInterval(renderInterval);
   magLines = new Array();
   loadBoundaries();
-  createPhotons();
+  if (customAngle.checked) {
+    createPhotons2();
+  } else {
+    createPhotons();
+  }
   renderInterval = setInterval(updateScreen, RENDER_INTERVAL_TIME);
 }
 
